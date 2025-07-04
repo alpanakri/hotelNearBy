@@ -46,19 +46,34 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res, next) => {
   let { id } = req.params;
+  // Get updated fields from the form
+  const updatedData = req.body.listing;
+
+  // Find the listing
   const listing = await Listing.findById(id);
+
+  // Update all fields except image
+  listing.title = updatedData.title;
+  listing.description = updatedData.description;
+  listing.location = updatedData.location;
+  listing.price = updatedData.price;
+  listing.country = updatedData.country;
+
+  // If a new image is uploaded, update it on Cloudinary and set new URL/public_id
   if (req.file) {
     const image = await uploadOnCloudinary(
       req.file.path,
       listing.image.public_id
-    ); //upadate the image in cloudinary and send different url but same public_id
+    );
     listing.image.url = image.url;
     listing.image.public_id = image.id;
   }
+
   await listing.save();
-  req.flash("success", "Listing update successfully!");
+  req.flash("success", "Listing updated successfully!");
   res.redirect(`/listings/${id}`);
 };
+
 module.exports.distroyListing = async (req, res, next) => {
   let { id } = req.params;
 
