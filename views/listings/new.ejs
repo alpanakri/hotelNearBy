@@ -1,0 +1,89 @@
+<% layout('/layouts/boilerplate') -%>
+
+<body>
+  <div class="containe row justify-content-center col-8 m-auto">
+    <h2 class="text-center" style="font-weight: 600; color: #222222">
+      Create a New Listing
+    </h2>
+    <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
+      <div class="mb-2">
+        <label for="title" class="form-lable fw-semibold">Title</label>
+        <input
+          name="listing[title]"
+          required
+          placeholder="Enter a Catchy title"
+          type="text"
+          id="title"
+          class="form-control"
+        />
+        <div class="invalid-feedback">Please choose a title.</div>
+      </div>
+      <div class="mb-2">
+        <label for="description" class="form-lable fw-semibold"
+          >Description</label
+        >
+        <textarea
+          name="listing[description]"
+          required
+          placeholder="Enter  description"
+          type="text"
+          class="form-control"
+          id="description"
+        ></textarea>
+        <div class="invalid-feedback">Please choose a description.</div>
+      </div>
+      <div class="mb-2">
+        <label for="image" class="form-lable-file fw-semibold">Upload Image</label>
+        <input
+          name="listing[image]"
+          type="file"
+          required
+          id="image"
+          class="form-control"
+        />
+        <div class="invalid-feedback">Please upload listing image</div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-4">
+          <label for="price" class="form-lable fw-semibold">Price</label>
+          <input
+            name="listing[price]"
+            required
+            min="0"
+            placeholder="1200"
+            type="number"
+            id="price"
+            class="form-control"
+          />
+          <div class="invalid-feedback">Please choose a valid price.</div>
+        </div>
+        <div class="col-md-8">
+          <label for="location" class="form-lable fw-semibold">Location</label>
+          <input
+            name="listing[location]"
+            placeholder="Jalandhar,Punjab"
+            type="text"
+            class="form-control"
+            id="location"
+            required
+          />
+          <div class="invalid-feedback">Please choose a location.</div>
+        </div>
+      </div>
+      <div class="mb-2">
+        <label for="country" class="form-lable fw-semibold">Country</label>
+        <input
+          name="listing[country]"
+          required
+          placeholder="India"
+          type="text"
+          class="form-control"
+          id="country"
+        />
+        <div class="invalid-feedback">Please choose a country.</div>
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Add</button>
+      <br />
+    </form>
+  </div>
+</body>
